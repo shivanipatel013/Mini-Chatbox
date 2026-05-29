@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Chat | Mini Chatbox</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-container small-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <a href="/chats" class="back-link">⬅ Back</a>
+        <h1>Edit Message</h1>
+      </div>
+    </header>
+
+    <main class="chat-card form-card">
+      <div class="edit-preview">
+        <div class="preview-badge">Preview</div>
+        <p>Editing conversation from <b><%= chat.from %></b> to <b><%= chat.to %></b></p>
+      </div>
+
+      <form method="POST" action="/chats/<%= chat._id %>?_method=PUT" class="chat-form">
+        <div class="form-group">
+          <label for="message">Update Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Write your message here..."
+            required
+            maxlength="50"
+          ><%= chat.message %></textarea>
+          <small class="char-counter">Maximum 50 characters</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary full-width">💾 Save Changes</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
