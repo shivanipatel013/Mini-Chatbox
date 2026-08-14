@@ -53,6 +53,17 @@ main()
       mongoose.connection.close();
   })
   .catch((err) => {
-      console.log("Seeding error:", err);
+      console.error("Seeding error:", err.message || err);
+      if (err.name === "MongooseServerSelectionError") {
+          console.error("\n=======================================================");
+          console.error("💡 TROUBLESHOOTING TIP: Mongoose failed to connect to Atlas.");
+          console.error("This usually means your IP address is not whitelisted.");
+          console.error("To fix this:");
+          console.error("1. Go to your MongoDB Atlas dashboard.");
+          console.error("2. Navigate to 'Network Access' under the 'Security' section.");
+          console.error("3. Click 'Add IP Address' and choose 'Allow Access From Anywhere' (0.0.0.0/0) or add your current IP.");
+          console.error("4. Render requires '0.0.0.0/0' to be whitelisted because its outbound IPs are dynamic.");
+          console.error("=======================================================\n");
+      }
       mongoose.connection.close();
   });
